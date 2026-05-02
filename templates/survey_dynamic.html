@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>IT满意度调查</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet">
+    <style>
+        body {
+            background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 20px;
+        }
+        .survey-card {
+            background: white;
+            border-radius: 20px;
+            box-shadow: 0 10px 40px rgba(0,0,0,0.1);
+            max-width: 600px;
+            width: 100%;
+            padding: 30px;
+        }
+        .survey-title {
+            color: #2c3e50;
+            font-weight: 600;
+            margin-bottom: 10px;
+            text-align: center;
+        }
+        .survey-subtitle {
+            color: #7f8c8d;
+            text-align: center;
+            margin-bottom: 30px;
+            font-size: 0.95rem;
+        }
+        .question-item {
+            margin-bottom: 25px;
+            padding-bottom: 15px;
+            border-bottom: 1px solid #ecf0f1;
+        }
+        .question-label {
+            font-weight: 500;
+            color: #34495e;
+            margin-bottom: 8px;
+            display: block;
+        }
+        .rating-group {
+            display: flex;
+            gap: 10px;
+            flex-wrap: wrap;
+        }
+        .rating-option {
+            flex: 1;
+            min-width: 60px;
+            text-align: center;
+        }
+        .rating-option input {
+            display: none;
+        }
+        .rating-option label {
+            display: block;
+            padding: 10px 0;
+            background: #f8f9fa;
+            border: 2px solid #dee2e6;
+            border-radius: 10px;
+            cursor: pointer;
+            transition: all 0.2s;
+            font-weight: 500;
+            color: #495057;
+        }
+        .rating-option input:checked + label {
+            background: #007bff;
+            border-color: #007bff;
+            color: white;
+        }
+        .rating-option label:hover {
+            background: #e9ecef;
+            border-color: #adb5bd;
+        }
+        .comments-textarea {
+            width: 100%;
+            padding: 12px;
+            border: 2px solid #dee2e6;
+            border-radius: 10px;
+            resize: vertical;
+            min-height: 100px;
+        }
+        .submit-btn {
+            background: #007bff;
+            border: none;
+            padding: 12px 30px;
+            font-size: 1.1rem;
+            font-weight: 500;
+            border-radius: 50px;
+            width: 100%;
+            transition: background 0.2s;
+        }
+        .submit-btn:hover {
+            background: #0056b3;
+        }
+        .footer-note {
+            text-align: center;
+            margin-top: 20px;
+            color: #95a5a6;
+            font-size: 0.85rem;
+        }
+    </style>
+</head>
+<body>
+    <div class="survey-card">
+        <h1 class="survey-title">IT服务满意度调查</h1>
+        <p class="survey-subtitle">您的反馈将帮助我们持续改进服务质量</p>
+
+        <form method="post">
+            {% for q in questions %}
+                <div class="question-item">
+                    <span class="question-label">{{ loop.index }}. {{ q.text }}</span>
+                    {% if q.type == 'rating' %}
+                        <div class="rating-group">
+                            {% for i in range(1, 6) %}
+                            <div class="rating-option">
+                                <input type="radio" name="{{ q.id }}" id="{{ q.id }}_{{ i }}" value="{{ i }}" {% if q.required %}required{% endif %}>
+                                <label for="{{ q.id }}_{{ i }}">{{ i }}<br><small>{{ ['非常不满意', '不满意', '一般', '满意', '非常满意'][i-1] }}</small></label>
+                            </div>
+                            {% endfor %}
+                        </div>
+                    {% elif q.type == 'text' %}
+                        <textarea name="{{ q.id }}" class="comments-textarea" placeholder="请在这里输入您的建议..."></textarea>
+                    {% endif %}
+                </div>
+            {% endfor %}
+            <button type="submit" class="btn btn-primary submit-btn">提交问卷</button>
+            <p class="footer-note">您提交后无法再次填写，请确保信息准确。</p>
+        </form>
+    </div>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>

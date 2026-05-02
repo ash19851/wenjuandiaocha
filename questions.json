@@ -1,0 +1,52 @@
+{
+  "questions": [
+    {
+      "id": "response_speed",
+      "text": "IT支持响应速度",
+      "type": "rating",
+      "required": true
+    },
+     {
+      "id": "system_speed",
+      "text": "系统运行速度",
+      "type": "rating",
+      "required": true
+    },
+    {
+      "id": "CRM",
+      "text": "crm系统满意度",
+      "type": "rating",
+      "required": true
+    },
+     {
+      "id": "SAP",
+      "text": "sap系统满意度",
+      "type": "rating",
+      "required": true
+    },
+    {
+      "id": "problem_solving",
+      "text": "问题解决能力",
+      "type": "rating",
+      "required": true
+    },
+    {
+      "id": "communication",
+      "text": "沟通态度",
+      "type": "rating",
+      "required": true
+    },
+    {
+      "id": "overall_satisfaction",
+      "text": "总体满意度",
+      "type": "rating",
+      "required": true
+    },
+    {
+      "id": "comments",
+      "text": "其他建议或意见",
+      "type": "text",
+      "required": false
+    }
+  ]
+}
